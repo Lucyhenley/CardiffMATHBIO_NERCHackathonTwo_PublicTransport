@@ -140,14 +140,17 @@ server <- function(input, output, session) {
       points(seats$x[seats$n==j],seats$y[seats$n==j],pch=19,cex=2)
     }
     lines(x_box,y_box)
+    for (i in 1:nrow(shield_loc)){
+      lines(c(shield_loc[i,1], shield_loc[i,2]),  c(shield_loc[i,3], shield_loc[i,4]), lty = 1, lwd = 3,col ='red'   )
+    }
     par(mar=c(0,0,0,0))
     plot(NULL, xlim=c(0,10),ylim=c(0,10), axes=FALSE, xlab="", ylab="")
 
     plot_colours <- c("red","black", rgb(0,0,1,0.2))
     markertype <- c(19,19,19)
-    text <- c("Unsafe seat","Available seat", "Safe radius")
-    legend(x = "top",x.intersp = 0.05,inset = 0,  legend = text, lty = NA, pt.bg = plot_colours, pt.cex= c(2,2,4),
-           col=c("red","black",rgb(0,0,1,0.2)), lwd=1, cex=2, pch = markertype, horiz = TRUE, text.width = 1.2)
+    text <- c("Unsafe seat","Available seat", "Safe radius","Shields")
+    legend(x = "top",x.intersp = 0.05,inset = 0,  legend = text, lty = c(NA,NA,NA,1), pt.bg = plot_colours, pt.cex= c(2,2,4,NA),
+           col=c("red","black",rgb(0,0,1,0.2),"red"), lwd=c(NA,NA,NA,3), cex=2, pch = markertype, horiz = TRUE, text.width = 1.2)
    })
   
   output$train_diagram <- renderPlot({
