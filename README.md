@@ -80,7 +80,7 @@ Placing shields allows for a greater capacity, as shown below.
 <img  src="https://github.com/Lucyhenley/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/blob/master/figs/one_two_shielding_plot.png?raw=true" alt="Train capacity" class = "center" width="400" height = 350/>
  </p>
  
-*The effect of social distancing measures on the passenger capacity*
+*The effect of social distancing measures on the passenger capacity with and without shielding between rows of seats*
 
 
 
