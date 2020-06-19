@@ -2,14 +2,17 @@
 
 This repository is Cardiff University MATHBIO's entry to <a href="https://digitalenvironment.org/home/covid-19-digital-sprint-hackathons/covid-19-hackathon-2-recovery/" target="_blank">**COVID-19 Hackathon 2: Recovery**</a>.
 
+
 ## <span style="color:blue">GOAL: Reduce public transport emissions per person by creating a tool that will present an optimal seating arrangement under social distancing.</span>
 
 ## RESULT: The seating optimiser app is published <a href="https://lucyhenley.shinyapps.io/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/" target="_blank">**here**</a>.
+
+### Goal: Reduce public transport emissions per person by creating a tool that will present an optimal seating arrangement under social distancing.
+
 ---
 
 ## Table of Contents
 
-- [Goal](#goal)
 - [Introduction](#introduction)
 - [Background](#background)
 - [Transport Capacity](#transport-capacity)
@@ -20,6 +23,10 @@ This repository is Cardiff University MATHBIO's entry to <a href="https://digita
 
 
 ---
+
+![Emissions per passenger](https://github.com/Lucyhenley/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/blob/master/figs/screenshot.png?raw=true)
+*An app was produced which derives the seating capacity of a train under specific conditions.*
+
 
 
 <p float="left">
@@ -85,6 +92,7 @@ The app uses a Graphical User Interface (GUI) to allow easy manipulation of inpu
 
 * and the social distancing distance
 
+
 Given these input values, the app reports the optimal number of seats which can be used in the train, their locations within the train and the emissions per passenger.
 
 Graphics are included which demonstrate the emissions per person, dependent on the number of passengers who can fit safely into the carriage. We also plot the emissions per passenger of small and large cars, so that we can identify the exact number of passengers requires per carriage to make public transport a lower-emission method of travel.
@@ -97,7 +105,6 @@ The GUI is published <a href="https://lucyhenley.shinyapps.io/CardiffMATHBIO_NER
 Many industries have taken to the use of plastic barriers, or 'shields', which can ease the effect of social distancing by placing a physical barrier between people to prevent transmission of disease. Such shields can be applied to public transport, in order to maximise the capacity of public transport and ensure that passengers feel safe whilst travelling.
 
 We define some basic shielding patterns in the app and include the effect of shields 'blocking' transmission of disease to increase the number of people who can safely use public transport. A possible side effect is that we can demonstrate multiple shielding patterns which achieve the same capacity, but use different quantities of shielding material. As most shielding is made of plastic, reducing the volume of plastic required has additional benefits in reducing pollution.
-
 ---
 
 ## Emissions
