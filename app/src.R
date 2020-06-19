@@ -198,6 +198,7 @@ use_zig_zag_shields <-function(shield_length,num_of_shields,shield_locations){
   shield_to_plot <- matrix(nrow=num_of_shields, ncol=4)
 
   
+  
 order_shields <- c(1,4,5,8,9,12,13,16,17,20,21,24,25,28,29,32,33,36)
 
   for (i in 1:num_of_shields){

@@ -14,7 +14,7 @@ ui <- fluidPage(
         "Standard shield patterning" = 1,
         "Zig-Zag shield patterning" = 0
       ),
-      selected = 1) ) ),
+      selected = 1),style = "font-size:20px;" ) ),
   
     
     conditionalPanel(condition = "input.inputSelect == 1",
