@@ -108,6 +108,7 @@ server <- function(input, output, session) {
   })
   
   output$emissionstext <- renderText({
+
     social_distancing <- 2 #to be overwritten
     if (input$inputSelect == 1 ){
       
@@ -157,24 +158,49 @@ server <- function(input, output, session) {
       social_distancing <- input$SocialDistance1
     }
     
+    seat_locations <- usable_seats()
+    heatmaps <- heatmapper(seat_locations,social_distancing,domain_x,domain_y)
+    shield_loc <- usable_shields()
+    heatmaps <- shielded_heatmapper(seat_locations,shield_loc,social_distancing,domain_x,domain_y)
+    seats <- shielded_seats()
+    cap <- nrow(seat_locations)
+    emission_dist <- emission_per_pass_train(cap)
+    emission_shield <- emission_per_pass_train(nrow(seats))
+    text <- paste0("CO$_{2}$ Emissions per passenger are ", floor(emission_dist), "km$^{-1}$g with social distancing, 
+                   or ", floor(emission_shield), "km$^{-1}$g with shields.")
+    plot(TeX(text), cex=2)
+    paste0(expression("text^2"))
+  })
+  
+
+  output$subplots <- renderPlot({
+    
+    social_distancing <- 2 #to be overwritten
+    if (input$inputSelect == 1 ){
+      social_distancing <- input$SocialDistance
+    }
+    else{
+      social_distancing <- input$SocialDistance1
+    }
     seat_sd <- usable_seats()
     heatmaps <- heatmapper(seat_sd,social_distancing,domain_x,domain_y)
     par(mfrow=c(3,1), mar= c(3,2,5, 1))
     captext <- paste("Capacity of 1 train carriage is ", nrow(seat_sd), " passengers with social distancing.")
     mytitle <- "Available seats with social distancing measures"
-    
+
     plot(NULL, xlim=c(0,domain_x), ylim=c(0,domain_y), asp=1, axes=FALSE,
          xlab="", ylab="")
     mtext(side=3, line=3, at=-0.07, adj=0, cex=1.2,font=2,  mytitle)
     mtext(side=3, line=1.6, at=-0.07, adj=0, cex=1, font=2, captext)
     points(seat_locations$x,seat_locations$y,pch=4,col=rgb(1, 0, 0,1))
+
     for (j in 1:nrow(seat_sd)) {
       idx1 <- 1+100*(j-1)
       idx2 <- 100*(j-1) + 100
       polygon(x=heatmaps[1,idx1:idx2],y=heatmaps[2,idx1:idx2],col=rgb(0, 0, 1,0.2))
       points(seat_sd[j,"x"],seat_sd[j,"y"],cex=2,pch=19)
     }
-    
+
     lines(x_box,y_box)
     seats <- shielded_seats()
     shield_loc <- usable_shields()
@@ -190,7 +216,7 @@ server <- function(input, output, session) {
       heatmaps <- shielded_heatmapper(seat_locations,shield_loc,social_distancing,domain_x,domain_y)
       
     }
-    
+
     captext <- paste("Capacity of 1 train carriage is ", nrow(seats), " passengers with shielding.")
     plot(NULL, xlim=c(0,domain_x), ylim=c(0,domain_y), asp=1, axes=FALSE, xlab="", 
          ylab="")
@@ -207,7 +233,6 @@ server <- function(input, output, session) {
     lines(x_box,y_box)
     
     
-    
     if (shield_loc[4]!=0){
       for (i in 1:nrow(shield_loc)){
         lines(c(shield_loc[i,1], shield_loc[i,2]),  c(shield_loc[i,3], shield_loc[i,4]), lty = 1, lwd = 3,col ='red'   )
@@ -217,13 +242,15 @@ server <- function(input, output, session) {
     
     par(mar=c(0,0,0,0))
     plot(NULL, xlim=c(0,10),ylim=c(0,10), axes=FALSE, xlab="", ylab="")
-    
+
     plot_colours <- c("red","black", rgb(0,0,1,0.2))
     markertype <- c(19,19,19)
     text <- c("Unsafe seat","Available seat", "Safe radius","Shields")
     legend(x = "top",x.intersp = 0.05,inset = 0,  legend = text, lty = c(NA,NA,NA,1), pt.bg = plot_colours, pt.cex= c(2,2,4,NA),
            col=c("red","black",rgb(0,0,1,0.2),"red"), lwd=c(NA,NA,NA,3), cex=2, pch = markertype, horiz = TRUE, text.width = 1.2)
+
   })
+
   
   output$train_diagram <- renderPlot({
     
@@ -278,7 +305,6 @@ server <- function(input, output, session) {
          xlab="Number of passengers",ylab=TeX("$CO_{2}$ emissions per passenger (km$^{-1}g$)"),lwd=3)
     abline(h=130.4,lwd=2,col="red",lty="dashed")
     abline(h=215.3,lwd=2,col="blue",lty="dashed")
-    
     
     lines(c(pass_dist, pass_dist), c(1, emission_per_pass_train(pass_dist)), lty = 1, lwd = 1,col="chartreuse4")   
     lines(c(-100,pass_dist ), c(emission_per_pass_train(pass_dist), emission_per_pass_train(pass_dist)), lty = 1, lwd = 1,col="chartreuse4")

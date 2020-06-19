@@ -2,20 +2,20 @@ remove_seats <- function(seat_locations,radius) {
   accepted_seats <- seat_locations$n
   for (i in 1:length(accepted_seats)){
     num_to_remove <- c()
-    
+
     if (i <= length(accepted_seats)){
-      
+
       #go through each accepted node and determine if too close
       fixed_seat <- seat_locations[accepted_seats[i],]
       for (m in accepted_seats[i]:accepted_seats[length(accepted_seats)]){
-        
+
         trial_seat <- seat_locations[m,]
         #if too close then a seat number to list
         if (((fixed_seat$x-trial_seat$x)^2 + (fixed_seat$y-trial_seat$y)^2) < radius^2 && fixed_seat$n != trial_seat$n){
           num_to_remove <- c(num_to_remove, m)
         }
       }
-      
+
       #remove the nodes too close from the accepted list
       if (length(num_to_remove) > 0) {
         for (j in 1:length(accepted_seats)){
@@ -37,9 +37,9 @@ remove_seats_shields <- function(seat_locations,radius,heatmaps) {
   accepted_seats <- seat_locations$n
   for (i in 1:length(accepted_seats)){
     num_to_remove <- c()
-    
+
     if (i <= length(accepted_seats)){
-      
+
       #go through each accepted node and determine if too close
       fixed_seat <- seat_locations[accepted_seats[i],]
       idx1 <- 1+100*(accepted_seats[i]-1)
@@ -47,14 +47,14 @@ remove_seats_shields <- function(seat_locations,radius,heatmaps) {
       xp <- heatmaps[1,idx1:idx2]
       yp <- heatmaps[2,idx1:idx2]
       for (m in accepted_seats[i]:accepted_seats[length(accepted_seats)]){
-        
+
         trial_seat <- seat_locations[m,]
         #if too close then a seat number to list
         if (inpolygon(trial_seat$x, trial_seat$y, xp, yp, boundary = TRUE) && fixed_seat$n != trial_seat$n){
           num_to_remove <- c(num_to_remove, m)
         }
       }
-      
+
       #remove the nodes too close from the accepted list
       if (length(num_to_remove) > 0) {
         for (j in 1:length(accepted_seats)){
@@ -93,7 +93,7 @@ heatmapper <- function(seat_locations,radius,domain_x,domain_y) {
 shielded_heatmapper <- function(seat_locations,shield,radius,domain_x,domain_y) {
   theta <- seq(0, 2*pi, length.out = 100)
   heatmaps <- array(numeric(),c(2,100*nrow(seat_locations)))
-  # print(seat_locations)
+
   for (j in 1:nrow(seat_locations)) {
     shield_interact <- c()
     x_circle <- radius*cos(theta) + seat_locations[j,"x"]
@@ -152,11 +152,11 @@ capacity <- function(width,length,radius) {
   first_x_node <- 0
   second_x_node <- (sqrt(2)/2)*radius
   third_x_node <- 0
-  
+
   first_row <- c()
   second_row <- c()
   third_row <- c()
-  
+
   if (sqrt(2)*radius<width) {
     while (first_x_node < length) {
       first_row <- c(first_row,first_x_node)
@@ -193,9 +193,9 @@ shield_locations_to_use <- function(shield_length,num_of_shields,shield_location
     else{
       shield_locations[i,4] = shield_locations[i,4] - (1.16 - shield_length)
     }
-    
+
   }
-  
+
   shield_locations[1:num_of_shields,]
 }
 
@@ -210,10 +210,9 @@ use_zig_zag_shields <-function(shield_length,num_of_shields,shield_locations){
     }
     
   }
-  
+
   shield_to_plot <- matrix(nrow=num_of_shields, ncol=4)
-  
-  
+
   order_shields <- c(1,4,5,8,9,12,13,16,17,20,21,24,25,28,29,32,33,36)
   
   for (i in 1:num_of_shields){
@@ -230,16 +229,18 @@ use_zig_zag_shields <-function(shield_length,num_of_shields,shield_locations){
     
     
   }
-  
+
   for (i in 1:num_of_shields){
+
     
     
     shield_to_plot[i,3] <- shield_locations[order_shields[i],3]
     
     
   }
-  
+
   for (i in 1:num_of_shields){
+
     
     
     shield_to_plot[i,4] <- shield_locations[order_shields[i],4]
@@ -324,17 +325,5 @@ manual_shield_selection <- function(shield_length,shield_locations,top_shields_p
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+#      shield_to_plot[i,4] <- shield_locations[order_shields[i],4]
 

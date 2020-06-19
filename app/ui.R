@@ -14,6 +14,7 @@ ui <- fluidPage(
         "Zig-Zag shield patterning" = 0,
         "Manual shield patterning" = 2
       ),
+
       selected = 1),style = "font-size:17px;" ) ),
     
     
@@ -25,11 +26,13 @@ ui <- fluidPage(
                      
                      column(3,      wellPanel(sliderInput("SocialDistance", h4("Social distancing rule (m)", align = "center"),
                                                           min = 1, max = 2, value = 2,width='100%')))
+
                      
                      
     ),
     
     conditionalPanel(condition = "input.inputSelect == 0",
+
                      column(3,     wellPanel( sliderInput("NumberofShields1", h4("Number of shields", align = "center"),
                                                           min = 1, max = 18, value = 18,width='100%'))),
                      column(3,    wellPanel(   sliderInput("ShieldLength1", h4("Length of shield", align = "center"),
@@ -61,10 +64,12 @@ ui <- fluidPage(
                    
   ),
   
+#  fluidRow(
+#    column(8, h1("ediuhe")),
+#    column(4,textOutput("emissionstext")       )
+#  ),
   
-  # fluidRow(
-  #    column(12, textOutput("capacity"))
-  #  ),  
+ 
   
   fluidRow(
     column(7,
@@ -77,6 +82,7 @@ ui <- fluidPage(
            plotOutput("trainemissions"),
            img(src="train_floorplan.png",width="600", height="150",align="centre")
     )
+
     
   )
   
