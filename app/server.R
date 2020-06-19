@@ -2,6 +2,14 @@ options(shiny.maxRequestSize=2000*1024^2)
 
 server <- function(input, output, session) {
   
+  url <- a("here", href="https://github.com/Lucyhenley/CardiffMATHBIO_NERCHackathonTwo_PublicTransport")
+  output$tab <- renderUI({
+    tagList("This app is Cardiff University MATHBIO's entry to COVID-19 Hackathon 2: Recovery. The goal is to reduce public transport
+  emissions per person by creating a tool that will present an optimal seating arrangement under social distancing.
+            To use the app, adjust the sliders to find optimal seating arrangements following social distancing in varying situations.
+            For more information, click ", url, ".")
+  })
+  
   usable_seats <- reactive({
     if (input$inputSelect == 1 ){
     seat_locations <- remove_seats(seat_locations,input$SocialDistance)

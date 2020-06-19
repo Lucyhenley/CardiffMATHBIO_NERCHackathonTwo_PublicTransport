@@ -2,8 +2,9 @@
 
 ui <- fluidPage(
   
-  titlePanel(h1("Optimisation of carriage capacity",align="centre"),
-             h4("Explanation text here")),
+  titlePanel(h1("Optimisation of carriage capacity",align="centre")),
+  
+  headerPanel(uiOutput("tab",style = "font-size:15px;")),
   
   fluidRow(
     column(3,     radioButtons(
