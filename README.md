@@ -87,9 +87,9 @@ We define some basic shielding patterns in the app and include the effect of shi
 
 The shielding patterns used are shown below. For both patterns, the shields are positioned between rows of seats such that they block transmission horizontally. The standard shielding pattern adds shields in consecutive rows from the front of the train to the back, eventuallly filling every available row. The zig zag shielding pattern adds shields in every other row on either side of the train, forming a zig zag pattern. 
 
-
-<p float="left">
-<img  src=https://github.com/Lucyhenley/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/blob/master/gif_images/shield.gif?raw=true alt="gif" class = "center" width="300" height = "300"/>
+<p align="center">
+<img  src=https://github.com/Lucyhenley/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/blob/master/gif_images/shield.gif?raw=true alt="gif" class = "center" width="400" height = "500"/>
+ </p>
 
 ---
 
@@ -129,7 +129,7 @@ The app uses a Graphical User Interface (GUI) to allow easy manipulation of inpu
 
 Given these input values, the app reports the optimal number of seats which can be used in the train, their locations within the train and the emissions per passenger.
 
-Graphics are included which demonstrate the emissions per person, dependent on the number of passengers who can fit safely into the carriage. We also plot the emissions per passenger of small and large cars, so that we can identify the exact number of passengers requires per carriage to make public transport a lower-emission method of travel.
+Graphics are included which demonstrate the emissions per person, dependent on the number of passengers who can fit safely into the carriage. We also plot the emissions per passenger of small and large cars, so that we can identify the exact number of passengers required per carriage to make public transport a lower-emission method of travel.
 
 The GUI is published <a href="https://lucyhenley.shinyapps.io/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/" target="_blank">**here**</a>.
 
