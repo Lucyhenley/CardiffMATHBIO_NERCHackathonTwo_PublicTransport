@@ -82,10 +82,10 @@ Many industries have taken to the use of plastic barriers, or 'shields', which c
 
 We define some basic shielding patterns in the app and include the effect of shields 'blocking' transmission of disease to increase the number of people who can safely use public transport. A possible side effect is that we can demonstrate multiple shielding patterns which achieve the same capacity, but use different quantities of shielding material. As most shielding is made of plastic, reducing the volume of plastic required has additional benefits in reducing pollution. 
 
-The shielding patterns used are shown below. For both patterns, the shields are positioned between rows of seats such that they block transmission horizontally. The standard shielding pattern adds shields in consecutive rows from the front of the train to the back, eventuallly filling every available row. The zig zag shielding pattern adds shields in every other row on either side of the train, forming a zig zag pattern. 
+The shielding patterns used are shown below. For both patterns, the shields are positioned between rows of seats such that they block transmission horizontally. The sequential shielding pattern adds shields in consecutive rows from the front of the train to the back, eventuallly filling every available row. The zig zag shielding pattern adds shields in every other row on either side of the train, forming a zig zag pattern. 
 
 <p align="center">
-<img  src=https://github.com/Lucyhenley/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/blob/master/gif_images/shield.gif?raw=true alt="gif" class = "center" width="400" height = "500"/>
+<img  src=https://github.com/Lucyhenley/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/blob/master/gif_images/shield.gif?raw=true alt="gif" class = "center" width="600" height = "500"/>
  </p>
 
 ---
