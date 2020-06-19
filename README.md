@@ -82,6 +82,9 @@ Placing shields allows for a greater capacity, as shown below.
  
 *The effect of social distancing measures on the passenger capacity*
 
+
+
+
 ---
 
 ## Emissions
