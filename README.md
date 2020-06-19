@@ -18,10 +18,6 @@ This repository is Cardiff University MATHBIO's entry to <a href="https://digita
 - [The GUI](#the-gui)
 - [Team](#team)
 
-
----
-
-
 ---
 ## Introduction
 During lockdown, usage of all forms of motorised transport fell, due to travel restrictions. However, as the UK eases lockdown measures, use of public transport remains low, due to safety concerns. Equally, people, who previously used public transport, are now choosing to use personal motor vehicles instead, resulting in increased travel emissions.
