@@ -2,20 +2,20 @@ remove_seats <- function(seat_locations,radius) {
   accepted_seats <- seat_locations$n
   for (i in 1:length(accepted_seats)){
     num_to_remove <- c()
-    
+
     if (i <= length(accepted_seats)){
-      
+
       #go through each accepted node and determine if too close
       fixed_seat <- seat_locations[accepted_seats[i],]
       for (m in accepted_seats[i]:accepted_seats[length(accepted_seats)]){
-        
+
         trial_seat <- seat_locations[m,]
         #if too close then a seat number to list
         if (((fixed_seat$x-trial_seat$x)^2 + (fixed_seat$y-trial_seat$y)^2) < radius^2 && fixed_seat$n != trial_seat$n){
           num_to_remove <- c(num_to_remove, m)
         }
       }
-      
+
       #remove the nodes too close from the accepted list
       if (length(num_to_remove) > 0) {
         for (j in 1:length(accepted_seats)){
@@ -37,24 +37,24 @@ remove_seats_shields <- function(seat_locations,radius,heatmaps) {
   accepted_seats <- seat_locations$n
   for (i in 1:length(accepted_seats)){
     num_to_remove <- c()
-    
+
     if (i <= length(accepted_seats)){
-      
+
       #go through each accepted node and determine if too close
       fixed_seat <- seat_locations[accepted_seats[i],]
       idx1 <- 1+100*(accepted_seats[i]-1)
       idx2 <- 100*(accepted_seats[i]-1) + 100
-      xp <- heatmaps[1,idx1:idx2] 
+      xp <- heatmaps[1,idx1:idx2]
       yp <- heatmaps[2,idx1:idx2]
       for (m in accepted_seats[i]:accepted_seats[length(accepted_seats)]){
-        
+
         trial_seat <- seat_locations[m,]
         #if too close then a seat number to list
         if (inpolygon(trial_seat$x, trial_seat$y, xp, yp, boundary = TRUE) && fixed_seat$n != trial_seat$n){
           num_to_remove <- c(num_to_remove, m)
         }
       }
-      
+
       #remove the nodes too close from the accepted list
       if (length(num_to_remove) > 0) {
         for (j in 1:length(accepted_seats)){
@@ -107,11 +107,11 @@ shielded_heatmapper <- function(seat_locations,shield,radius,domain_x,domain_y) 
       shield_x <- rep(shield[i,1],100)
       distance2 <- (shield_x-seat_locations[j,"x"])^2 + (shield_y-seat_locations[j,"y"])^2
       if (min(distance2) < radius^2) {
-        if (shield[i,1] < seat_locations[j,"x"]) {  
+        if (shield[i,1] < seat_locations[j,"x"]) {
           shield_top <- max(shield[i,3], shield[i,4])
           shield_bottom <- min(shield[i,3],shield[i,4])
           vec1 <- c(shield[i,1]-seat_locations[j,"x"],shield_top -seat_locations[j,"y"])
-          vec2 <- c(shield[i,1]-seat_locations[j,"x"],shield_bottom -seat_locations[j,"y"]) 
+          vec2 <- c(shield[i,1]-seat_locations[j,"x"],shield_bottom -seat_locations[j,"y"])
           Trapezium_1 <- seat_locations[j,] + 20*vec1
           Trapezium_2 <- seat_locations[j,] + 20*vec2
           condition_in<- inpolygon(x_circle,y_circle,c(shield[i,1],Trapezium_1$x,Trapezium_2$x,shield[i,1]),c(shield_top, Trapezium_1$y,Trapezium_2$y,shield_bottom))
@@ -121,7 +121,7 @@ shielded_heatmapper <- function(seat_locations,shield,radius,domain_x,domain_y) 
           shield_top <- max(shield[i,3], shield[i,4])
           shield_bottom <- min(shield[i,3],shield[i,4])
           vec1 <- c(shield[i,1]-seat_locations[j,"x"],shield_top -seat_locations[j,"y"])
-          vec2 <- c(shield[i,1]-seat_locations[j,"x"],shield_bottom -seat_locations[j,"y"]) 
+          vec2 <- c(shield[i,1]-seat_locations[j,"x"],shield_bottom -seat_locations[j,"y"])
           Trapezium_1 <- seat_locations[j,] + 20*vec1
           Trapezium_2 <- seat_locations[j,] + 20*vec2
           condition_in<- inpolygon(x_circle,y_circle,c(shield[i,1],Trapezium_2$x,Trapezium_1$x,shield[i,1]),c(shield_bottom, Trapezium_2$y,Trapezium_1$y,shield_top))
@@ -137,12 +137,12 @@ shielded_heatmapper <- function(seat_locations,shield,radius,domain_x,domain_y) 
   heatmaps
 }
 
-emission_per_pass_train <- function(pass_no) { 
+emission_per_pass_train <- function(pass_no) {
   total_train_150_emissions <- 2152
   total_train_150_emissions/pass_no
 }
 
-emission_per_pass_bus <- function(pass_no) { 
+emission_per_pass_bus <- function(pass_no) {
   total_bus_emissions <- 1030.62
   total_bus_emissions/pass_no
 }
@@ -152,11 +152,11 @@ capacity <- function(width,length,radius) {
   first_x_node <- 0
   second_x_node <- (sqrt(2)/2)*radius
   third_x_node <- 0
-  
+
   first_row <- c()
   second_row <- c()
   third_row <- c()
-  
+
   if (sqrt(2)*radius<width) {
     while (first_x_node < length) {
       first_row <- c(first_row,first_x_node)
@@ -193,9 +193,9 @@ shield_locations_to_use <- function(shield_length,num_of_shields,shield_location
     else{
       shield_locations[i,4] = shield_locations[i,4] - (1.16 - shield_length)
     }
-    
+
   }
-  
+
   shield_locations[1:num_of_shields,]
 }
 
@@ -210,46 +210,42 @@ use_zig_zag_shields <-function(shield_length,num_of_shields,shield_locations){
     }
 
   }
-  
+
   shield_to_plot <- matrix(nrow=num_of_shields, ncol=4)
 
-  
+
 order_shields <- c(1,4,5,8,9,12,13,16,17,20,21,24,25,28,29,32,33,36)
 
   for (i in 1:num_of_shields){
-    
-    
-        shield_to_plot[i,1] <- shield_locations[order_shields[i],1] 
-    
-      
+
+
+        shield_to_plot[i,1] <- shield_locations[order_shields[i],1]
+
+
   }
   for (i in 1:num_of_shields){
-    
-      
-      shield_to_plot[i,2] <- shield_locations[order_shields[i],2] 
-      
-    
+
+
+      shield_to_plot[i,2] <- shield_locations[order_shields[i],2]
+
+
   }
-  
+
   for (i in 1:num_of_shields){
-    
-      
-      shield_to_plot[i,3] <- shield_locations[order_shields[i],3] 
-      
-    
+
+
+      shield_to_plot[i,3] <- shield_locations[order_shields[i],3]
+
+
   }
-  
+
   for (i in 1:num_of_shields){
-    
-      
-      shield_to_plot[i,4] <- shield_locations[order_shields[i],4] 
-      
-    
+
+
+      shield_to_plot[i,4] <- shield_locations[order_shields[i],4]
+
+
   }
   shield_to_plot
 
 }
-
-
-
-
