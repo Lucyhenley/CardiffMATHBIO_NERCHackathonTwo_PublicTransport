@@ -93,7 +93,7 @@ heatmapper <- function(seat_locations,radius,domain_x,domain_y) {
 shielded_heatmapper <- function(seat_locations,shield,radius,domain_x,domain_y) {
   theta <- seq(0, 2*pi, length.out = 100)
   heatmaps <- array(numeric(),c(2,100*nrow(seat_locations)))
- # print(seat_locations)
+
   for (j in 1:nrow(seat_locations)) {
     shield_interact <- c()
     x_circle <- radius*cos(theta) + seat_locations[j,"x"]
@@ -208,44 +208,122 @@ use_zig_zag_shields <-function(shield_length,num_of_shields,shield_locations){
     else{
       shield_locations[i,4] = shield_locations[i,4] - (1.16 - shield_length)
     }
-
+    
   }
 
   shield_to_plot <- matrix(nrow=num_of_shields, ncol=4)
 
-
-order_shields <- c(1,4,5,8,9,12,13,16,17,20,21,24,25,28,29,32,33,36)
-
+  order_shields <- c(1,4,5,8,9,12,13,16,17,20,21,24,25,28,29,32,33,36)
+  
   for (i in 1:num_of_shields){
-
-
-        shield_to_plot[i,1] <- shield_locations[order_shields[i],1]
-
-
+    
+    
+    shield_to_plot[i,1] <- shield_locations[order_shields[i],1]
+    
+    
   }
   for (i in 1:num_of_shields){
-
-
-      shield_to_plot[i,2] <- shield_locations[order_shields[i],2]
-
-
-  }
-
-  for (i in 1:num_of_shields){
-
-
-      shield_to_plot[i,3] <- shield_locations[order_shields[i],3]
-
-
+    
+    
+    shield_to_plot[i,2] <- shield_locations[order_shields[i],2]
+    
+    
   }
 
   for (i in 1:num_of_shields){
 
+    
+    
+    shield_to_plot[i,3] <- shield_locations[order_shields[i],3]
+    
+    
+  }
 
-      shield_to_plot[i,4] <- shield_locations[order_shields[i],4]
+  for (i in 1:num_of_shields){
 
-
+    
+    
+    shield_to_plot[i,4] <- shield_locations[order_shields[i],4]
+    
+    
   }
   shield_to_plot
-
+  
 }
+
+
+
+manual_shield_selection <- function(shield_length,shield_locations,top_shields_positions,bottom_shield_positions){
+  #adjust the length of the shields
+  
+  for (i in 1:nrow(shield_locations)) {
+    if (i %% 2 == 0) {
+      shield_locations[i, 3] = shield_locations[i, 3] + (1.16 - shield_length)
+    }
+    else{
+      shield_locations[i, 4] = shield_locations[i, 4] - (1.16 - shield_length)
+    }
+    
+  }
+  top_shield_numbers <- as.numeric(top_shields_positions)
+  bot_shield_numbers <- as.numeric(bottom_shield_positions)
+  
+  if ((length(top_shield_numbers) + length(bot_shield_numbers)) == 0) {
+    shield_to_plot <- c(0,0,0,0)
+    
+  }
+  else{
+    
+    
+    shield_to_plot <-
+      matrix(nrow = (length(top_shield_numbers) + length(bot_shield_numbers)), ncol =
+               4)
+    if (length(top_shield_numbers) != 0 ){
+      
+      for (i in 1:length(top_shield_numbers)) {
+        shield_to_plot[i, 1] <- shield_locations[2*top_shield_numbers[i], 1]
+      }
+      
+      for (i in 1:length(top_shield_numbers)) {
+        shield_to_plot[i, 2] <- shield_locations[2*top_shield_numbers[i], 2]
+      }
+      
+      for (i in 1:length(top_shield_numbers)) {
+        shield_to_plot[i, 3] <- shield_locations[2*top_shield_numbers[i], 3]
+      }
+      
+      for (i in 1:length(top_shield_numbers)) {
+        shield_to_plot[i, 4] <- shield_locations[2*top_shield_numbers[i], 4]
+      }
+      
+    }
+    
+    
+    if (length(bot_shield_numbers) != 0 ){
+      
+      for (i in 1:length(bot_shield_numbers)) {
+        shield_to_plot[length(top_shield_numbers)+i, 1] <- shield_locations[2*bot_shield_numbers[i]-1, 1]
+      }
+      
+      for (i in 1:length(bot_shield_numbers)){
+        shield_to_plot[length(top_shield_numbers)+i, 2] <- shield_locations[2*bot_shield_numbers[i]-1, 2]
+      }
+      for (i in 1:length(bot_shield_numbers)) {
+        shield_to_plot[length(top_shield_numbers)+i, 3] <- shield_locations[2*bot_shield_numbers[i]-1, 3]
+      }
+      for (i in 1:length(bot_shield_numbers)) {
+        shield_to_plot[length(top_shield_numbers)+i, 4] <- shield_locations[2*bot_shield_numbers[i]-1, 4]
+      }
+      
+    }
+    
+  }
+  
+  shield_to_plot
+  
+  
+}
+
+
+#      shield_to_plot[i,4] <- shield_locations[order_shields[i],4]
+
