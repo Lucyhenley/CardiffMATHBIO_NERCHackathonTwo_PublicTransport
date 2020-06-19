@@ -89,8 +89,7 @@ The shielding patterns used are shown below. For both patterns, the shields are 
 
 
 <p float="left">
-<img  src=https://github.com/Lucyhenley/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/blob/master/gif_images/Diagonal_seat.gif?raw=true alt="gif" class = "center" width="300" height = "300"/>
-<img  src=https://github.com/Lucyhenley/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/blob/master/gif_images/Standard_seat.gif?raw=true alt="gif" class = "center" width="300" height = "300"/>
+<img  src=https://github.com/Lucyhenley/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/blob/master/gif_images/shield.gif?raw=true alt="gif" class = "center" width="300" height = "300"/>
 
 ---
 
