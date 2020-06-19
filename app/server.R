@@ -111,7 +111,6 @@ server <- function(input, output, session) {
     mytitle <- "Available seats with social distancing measures"
 
   plot(NULL, xlim=c(0,domain_x), ylim=c(0,domain_y), asp=1, axes=FALSE,
-#       main="Available seats with social distancing measures", sub=captext,
        xlab="", ylab="")
   mtext(side=3, line=3, at=-0.07, adj=0, cex=1.2,font=2,  mytitle)
   mtext(side=3, line=1.6, at=-0.07, adj=0, cex=1, font=2, captext)
@@ -128,8 +127,7 @@ server <- function(input, output, session) {
     shield_loc <- usable_shields()
     heatmaps <- shielded_heatmapper(seat_locations,shield_loc,social_distancing,domain_x,domain_y)
     captext <- paste("Capacity of 1 train carriage is ", nrow(seats), " passengers with shielding.")
-    plot(NULL, xlim=c(0,domain_x), ylim=c(0,domain_y), asp=1, axes=FALSE, xlab="",
-#         main="Available seats with social distancing measures and shielding", sub=captext, 
+    plot(NULL, xlim=c(0,domain_x), ylim=c(0,domain_y), asp=1, axes=FALSE, xlab="", 
          ylab="")
     mytitle <- "Available seats with social distancing measures and shielding"
     mtext(side=3, line=3, at=-0.07, adj=0, cex=1.2, font=2, mytitle)
@@ -150,8 +148,7 @@ server <- function(input, output, session) {
     text <- c("Unsafe seat","Available seat", "Safe radius")
     legend(x = "top",x.intersp = 0.05,inset = 0,  legend = text, lty = NA, pt.bg = plot_colours, pt.cex= c(2,2,4),
            col=c("red","black",rgb(0,0,1,0.2)), lwd=1, cex=2, pch = markertype, horiz = TRUE, text.width = 1.2)
- #   legend('bottom',legend = c("Fabricated Metal", "Iron and Steel", "Paper", "Beverages", "Tobacco"), col = c("blue","black", "green", "orange", "pink"), lwd = 5, xpd = TRUE, horiz = TRUE, cex = 1, seg.len=1, bty = 'n')
-  })
+   })
   
   output$train_diagram <- renderPlot({
     
@@ -193,11 +190,12 @@ server <- function(input, output, session) {
     abline(h=215.3,lwd=2,col="blue",lty="dashed")
  
     
-    lines(c(0,pass_dist ), c(emission_per_pass_train(pass_dist), emission_per_pass_train(pass_dist)), lty = 1, lwd = 1)
-    lines(c(pass_dist, pass_dist), c(0, emission_per_pass_train(pass_dist)), lty = 1, lwd = 1)
+    lines(c(pass_dist, pass_dist), c(1, emission_per_pass_train(pass_dist)), lty = 1, lwd = 1,col="chartreuse4")   
+    lines(c(-100,pass_dist ), c(emission_per_pass_train(pass_dist), emission_per_pass_train(pass_dist)), lty = 1, lwd = 1,col="chartreuse4")
+
     
-    lines(c(0,pass_shield ), c(emission_per_pass_train(pass_shield), emission_per_pass_train(pass_shield)), lty = 1, lwd = 1)
-    lines(c(pass_shield, pass_shield), c(0, emission_per_pass_train(pass_shield)), lty = 1, lwd = 1)
+    lines(c(-100,pass_shield ), c(emission_per_pass_train(pass_shield), emission_per_pass_train(pass_shield)), lty = 1, lwd = 1,col="darkorchid")
+    lines(c(pass_shield, pass_shield), c(1, emission_per_pass_train(pass_shield)), lty = 1, lwd = 1,col="darkorchid")
     
     points(pass_dist,emission_per_pass_train(pass_dist),pch=4,col="chartreuse4",cex=2,lwd = 2)
     points(pass_shield,emission_per_pass_train(pass_shield),pch=4,col="darkorchid",cex=2,lwd=2)
