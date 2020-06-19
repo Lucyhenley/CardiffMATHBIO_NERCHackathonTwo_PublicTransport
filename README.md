@@ -145,9 +145,3 @@ The team is comprised of PhD Students from the mathematics department of Cardiff
 | [![Lucy Henley](https://avatars1.githubusercontent.com/Lucyhenley?s=200)](https://github.com/Lucyhenley)    | [![Joshua Moore](https://avatars1.githubusercontent.com/joshwillmoore1?s=200)](https://github.com/joshwillmoore1) | [![Timothy Ostler](https://avatars1.githubusercontent.com/OstlerT?s=200)](https://github.com/OstlerT)  |
 | <a href="https://github.com/Lucyhenley" target="_blank">`github.com/Lucyhenley`</a> | <a href="https://github.com/joshwillmoore1" target="_blank">`github.com/joshwillmoore1`</a> | <a href="https://github.com/OstlerT" target="_blank">`github.com/OstlerT`</a> |
 
-
-
-[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
-
-- **[MIT license](http://opensource.org/licenses/mit-license.php)**
-- Copyright 2015 © <a href="http://fvcproductions.com" target="_blank">FVCproductions</a>.
