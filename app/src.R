@@ -44,7 +44,7 @@ remove_seats_shields <- function(seat_locations,radius,heatmaps) {
       fixed_seat <- seat_locations[accepted_seats[i],]
       idx1 <- 1+100*(accepted_seats[i]-1)
       idx2 <- 100*(accepted_seats[i]-1) + 100
-      xp <- heatmaps[1,idx1:idx2] 
+      xp <- heatmaps[1,idx1:idx2]
       yp <- heatmaps[2,idx1:idx2]
       for (m in accepted_seats[i]:accepted_seats[length(accepted_seats)]){
         
@@ -93,6 +93,7 @@ heatmapper <- function(seat_locations,radius,domain_x,domain_y) {
 shielded_heatmapper <- function(seat_locations,shield,radius,domain_x,domain_y) {
   theta <- seq(0, 2*pi, length.out = 100)
   heatmaps <- array(numeric(),c(2,100*nrow(seat_locations)))
+  # print(seat_locations)
   for (j in 1:nrow(seat_locations)) {
     shield_interact <- c()
     x_circle <- radius*cos(theta) + seat_locations[j,"x"]
@@ -106,11 +107,25 @@ shielded_heatmapper <- function(seat_locations,shield,radius,domain_x,domain_y) 
       shield_x <- rep(shield[i,1],100)
       distance2 <- (shield_x-seat_locations[j,"x"])^2 + (shield_y-seat_locations[j,"y"])^2
       if (min(distance2) < radius^2) {
-        if (shield[i,1] < seat_locations[j,"x"]) {     
-          x_circle[x_circle<shield[i,1] & y_circle < max(shield_y) & y_circle>min(shield_y)] <- shield_x[x_circle < shield[i,1] & y_circle< max(shield_y) & y_circle> min(shield_y)]
+        if (shield[i,1] < seat_locations[j,"x"]) {
+          shield_top <- max(shield[i,3], shield[i,4])
+          shield_bottom <- min(shield[i,3],shield[i,4])
+          vec1 <- c(shield[i,1]-seat_locations[j,"x"],shield_top -seat_locations[j,"y"])
+          vec2 <- c(shield[i,1]-seat_locations[j,"x"],shield_bottom -seat_locations[j,"y"])
+          Trapezium_1 <- seat_locations[j,] + 20*vec1
+          Trapezium_2 <- seat_locations[j,] + 20*vec2
+          condition_in<- inpolygon(x_circle,y_circle,c(shield[i,1],Trapezium_1$x,Trapezium_2$x,shield[i,1]),c(shield_top, Trapezium_1$y,Trapezium_2$y,shield_bottom))
+          x_circle[condition_in] <- shield[i,1]
         }
         else {
-          x_circle[x_circle>shield[i,1] & y_circle < max(shield_y) & y_circle>min(shield_y)] <- shield_x[x_circle > shield[i,1] & y_circle< max(shield_y) & y_circle> min(shield_y)]
+          shield_top <- max(shield[i,3], shield[i,4])
+          shield_bottom <- min(shield[i,3],shield[i,4])
+          vec1 <- c(shield[i,1]-seat_locations[j,"x"],shield_top -seat_locations[j,"y"])
+          vec2 <- c(shield[i,1]-seat_locations[j,"x"],shield_bottom -seat_locations[j,"y"])
+          Trapezium_1 <- seat_locations[j,] + 20*vec1
+          Trapezium_2 <- seat_locations[j,] + 20*vec2
+          condition_in<- inpolygon(x_circle,y_circle,c(shield[i,1],Trapezium_2$x,Trapezium_1$x,shield[i,1]),c(shield_bottom, Trapezium_2$y,Trapezium_1$y,shield_top))
+          x_circle[condition_in] <- shield[i,1]
         }
       }
     }
@@ -122,12 +137,12 @@ shielded_heatmapper <- function(seat_locations,shield,radius,domain_x,domain_y) 
   heatmaps
 }
 
-emission_per_pass_train <- function(pass_no) { 
+emission_per_pass_train <- function(pass_no) {
   total_train_150_emissions <- 2152
   total_train_150_emissions/pass_no
 }
 
-emission_per_pass_bus <- function(pass_no) { 
+emission_per_pass_bus <- function(pass_no) {
   total_bus_emissions <- 1030.62
   total_bus_emissions/pass_no
 }
@@ -169,6 +184,7 @@ capacity <- function(width,length,radius) {
 }
 
 
+
 shield_locations_to_use <- function(shield_length,num_of_shields,shield_locations){
   for (i in 1:nrow(shield_locations)){
     if (i%%2 == 0){
@@ -192,47 +208,133 @@ use_zig_zag_shields <-function(shield_length,num_of_shields,shield_locations){
     else{
       shield_locations[i,4] = shield_locations[i,4] - (1.16 - shield_length)
     }
-
+    
   }
   
   shield_to_plot <- matrix(nrow=num_of_shields, ncol=4)
-
   
-order_shields <- c(1,4,5,8,9,12,13,16,17,20,21,24,25,28,29,32,33,36)
-
-  for (i in 1:num_of_shields){
-    
-    
-        shield_to_plot[i,1] <- shield_locations[order_shields[i],1] 
-    
-      
-  }
-  for (i in 1:num_of_shields){
-    
-      
-      shield_to_plot[i,2] <- shield_locations[order_shields[i],2] 
-      
-    
-  }
+  
+  order_shields <- c(1,4,5,8,9,12,13,16,17,20,21,24,25,28,29,32,33,36)
   
   for (i in 1:num_of_shields){
     
-      
-      shield_to_plot[i,3] <- shield_locations[order_shields[i],3] 
-      
+    
+    shield_to_plot[i,1] <- shield_locations[order_shields[i],1]
+    
+    
+  }
+  for (i in 1:num_of_shields){
+    
+    
+    shield_to_plot[i,2] <- shield_locations[order_shields[i],2]
+    
     
   }
   
   for (i in 1:num_of_shields){
     
-      
-      shield_to_plot[i,4] <- shield_locations[order_shields[i],4] 
-      
+    
+    shield_to_plot[i,3] <- shield_locations[order_shields[i],3]
+    
+    
+  }
+  
+  for (i in 1:num_of_shields){
+    
+    
+    shield_to_plot[i,4] <- shield_locations[order_shields[i],4]
+    
     
   }
   shield_to_plot
-
+  
 }
+
+
+
+manual_shield_selection <- function(shield_length,shield_locations,top_shields_positions,bottom_shield_positions){
+  #adjust the length of the shields
+  
+  for (i in 1:nrow(shield_locations)) {
+    if (i %% 2 == 0) {
+      shield_locations[i, 3] = shield_locations[i, 3] + (1.16 - shield_length)
+    }
+    else{
+      shield_locations[i, 4] = shield_locations[i, 4] - (1.16 - shield_length)
+    }
+    
+  }
+  top_shield_numbers <- as.numeric(top_shields_positions)
+  bot_shield_numbers <- as.numeric(bottom_shield_positions)
+  
+  if ((length(top_shield_numbers) + length(bot_shield_numbers)) == 0) {
+    shield_to_plot <- c(0,0,0,0)
+    
+  }
+  else{
+    
+    
+    shield_to_plot <-
+      matrix(nrow = (length(top_shield_numbers) + length(bot_shield_numbers)), ncol =
+               4)
+    if (length(top_shield_numbers) != 0 ){
+      
+      for (i in 1:length(top_shield_numbers)) {
+        shield_to_plot[i, 1] <- shield_locations[2*top_shield_numbers[i], 1]
+      }
+      
+      for (i in 1:length(top_shield_numbers)) {
+        shield_to_plot[i, 2] <- shield_locations[2*top_shield_numbers[i], 2]
+      }
+      
+      for (i in 1:length(top_shield_numbers)) {
+        shield_to_plot[i, 3] <- shield_locations[2*top_shield_numbers[i], 3]
+      }
+      
+      for (i in 1:length(top_shield_numbers)) {
+        shield_to_plot[i, 4] <- shield_locations[2*top_shield_numbers[i], 4]
+      }
+      
+    }
+    
+    
+    if (length(bot_shield_numbers) != 0 ){
+      
+      for (i in 1:length(bot_shield_numbers)) {
+        shield_to_plot[length(top_shield_numbers)+i, 1] <- shield_locations[2*bot_shield_numbers[i]-1, 1]
+      }
+      
+      for (i in 1:length(bot_shield_numbers)){
+        shield_to_plot[length(top_shield_numbers)+i, 2] <- shield_locations[2*bot_shield_numbers[i]-1, 2]
+      }
+      for (i in 1:length(bot_shield_numbers)) {
+        shield_to_plot[length(top_shield_numbers)+i, 3] <- shield_locations[2*bot_shield_numbers[i]-1, 3]
+      }
+      for (i in 1:length(bot_shield_numbers)) {
+        shield_to_plot[length(top_shield_numbers)+i, 4] <- shield_locations[2*bot_shield_numbers[i]-1, 4]
+      }
+      
+    }
+    
+  }
+  
+  shield_to_plot
+  
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
