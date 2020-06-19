@@ -136,41 +136,13 @@ server <- function(input, output, session) {
     text <- paste0("CO$_{2}$ Emissions per passenger are ", floor(emission_dist), "km$^{-1}$g with social distancing, 
                    or ", floor(emission_shield), "km$^{-1}$g with shields.")
     plot(TeX(text), cex=2)
-    paste0(expression("text^2"))
+    paste0(expression("CO_{2}"),"Emissions per passenger are ", floor(emission_dist), expression("km$^{-1}$g")," with social distancing,
+or" , floor(emission_shield), expression("km^-1g"), "with shields.")
+    paste0("C02 emissions per passenger are ", floor(emission_dist),  " g/km with social distancing,
+or " , floor(emission_shield), " g/km with shields.")
   })
   
   
-  output$subplots <- renderPlot({
-    
-    social_distancing <- 2 #to be overwritten
-    if (input$inputSelect == 1 ){
-      
-      social_distancing <- input$SocialDistance
-      
-    }
-    else if (input$inputSelect == 2 ){
-      
-      social_distancing <- input$SocialDistance_MANUAL
-      
-    }
-    else{
-      
-      social_distancing <- input$SocialDistance1
-    }
-    
-    seat_locations <- usable_seats()
-    heatmaps <- heatmapper(seat_locations,social_distancing,domain_x,domain_y)
-    shield_loc <- usable_shields()
-    heatmaps <- shielded_heatmapper(seat_locations,shield_loc,social_distancing,domain_x,domain_y)
-    seats <- shielded_seats()
-    cap <- nrow(seat_locations)
-    emission_dist <- emission_per_pass_train(cap)
-    emission_shield <- emission_per_pass_train(nrow(seats))
-    text <- paste0("CO$_{2}$ Emissions per passenger are ", floor(emission_dist), "km$^{-1}$g with social distancing, 
-                   or ", floor(emission_shield), "km$^{-1}$g with shields.")
-    plot(TeX(text), cex=2)
-    paste0(expression("text^2"))
-  })
   
 
   output$subplots <- renderPlot({
@@ -190,8 +162,8 @@ server <- function(input, output, session) {
 
     plot(NULL, xlim=c(0,domain_x), ylim=c(0,domain_y), asp=1, axes=FALSE,
          xlab="", ylab="")
-    mtext(side=3, line=3, at=-0.07, adj=0, cex=1.2,font=2,  mytitle)
-    mtext(side=3, line=1.6, at=-0.07, adj=0, cex=1, font=2, captext)
+    mtext(side=3, line=3, at=-0.07, adj=0, cex=1.6,font=2,  mytitle)
+    mtext(side=3, line=1.6, at=-0.07, adj=0, cex=1.4, font=2, captext)
     points(seat_locations$x,seat_locations$y,pch=4,col=rgb(1, 0, 0,1))
 
     for (j in 1:nrow(seat_sd)) {
@@ -220,8 +192,8 @@ server <- function(input, output, session) {
     plot(NULL, xlim=c(0,domain_x), ylim=c(0,domain_y), asp=1, axes=FALSE, xlab="", 
          ylab="")
     mytitle <- "Available seats with social distancing measures and shielding"
-    mtext(side=3, line=3, at=-0.07, adj=0, cex=1.2, font=2, mytitle)
-    mtext(side=3, line=1.6, at=-0.07, adj=0, cex=1, font=2, captext)
+    mtext(side=3, line=3, at=-0.07, adj=0, cex=1.6, font=2, mytitle)
+    mtext(side=3, line=1.6, at=-0.07, adj=0, cex=1.4, font=2, captext)
     points(seat_locations$x,seat_locations$y,pch=4,col=rgb(1, 0, 0,1))
     for (j in seats$n) {
       idx1 <- 1+100*(j-1)
@@ -300,8 +272,14 @@ server <- function(input, output, session) {
     emission_shield <- emission_per_pass_train(pass_shield)
     text <- paste0("CO$_{2}$ Emissions per passenger are ", floor(emission_dist), "km$^{-1}$g with social distancing, 
                    or ", floor(emission_shield), "km$^{-1}$g with shields.")
-    plot(pass, emission_per_pass_train(pass),type="l", xlim=c(0,76), ylim=c(20,2200), sub = TeX(text), log="y",
+    
+    text1 <- c(bquote( CO[2] ~ "emissions per passenger are " ~ .(floor(emission_dist)) ~ " with "),
+               bquote("social distancing"))
+   # par(mfrow=c(2,1))
+    plot(pass, emission_per_pass_train(pass),type="l", lim=c(0,76), ylim=c(20,2200), log="y",
          xlab="Number of passengers",ylab=TeX("$CO_{2}$ emissions per passenger (km$^{-1}g$)"),lwd=3)
+
+    
     abline(h=130.4,lwd=2,col="red",lty="dashed")
     abline(h=215.3,lwd=2,col="blue",lty="dashed")
     
@@ -315,9 +293,7 @@ server <- function(input, output, session) {
     points(pass_dist,emission_per_pass_train(pass_dist),pch=4,col="chartreuse4",cex=2,lwd = 2)
     points(pass_shield,emission_per_pass_train(pass_shield),pch=4,col="darkorchid",cex=2,lwd=2)
     legend("topright",c("Train","Small car","Large car","Capacity with distancing","Capacity with shielding"),lwd=c(3,2,2,2,2), lty=c(1,5,5,0,0), pch=c(NA,NA,NA,4,4),col=c("black","red","blue","chartreuse4","darkorchid"))
-    box(bty="l")
-    axis(2)
-    axis(1) 
+   
   })
   
   output$social_distanced_capacity <- renderPlot({

@@ -1,7 +1,11 @@
 
 ui <- fluidPage(
   
-  titlePanel(h1("Optimisation of carriage capacity",align="centre")),
+  titlePanel(h1("The effect of shielding patterns on carriage capacity",align="centre")),
+  
+  tags$head(tags$style("#emissionstext{color: red;
+                                 font-size: 25px;
+                                 }")),
   
   headerPanel(uiOutput("tab",style = "font-size:15px;")),
   
@@ -10,7 +14,7 @@ ui <- fluidPage(
       "inputSelect",
       label = ("Choose shield patterning:"),
       choices = c(
-        "Standard shield patterning" = 1,
+        "Sequential shield patterning" = 1,
         "Zig-Zag shield patterning" = 0,
         "Manual shield patterning" = 2
       ),
@@ -75,12 +79,16 @@ ui <- fluidPage(
     column(7,
            headerPanel(""),
            headerPanel(""),
-           plotOutput("subplots", width = "100%", height = "600px"))
-    ,
+           plotOutput("subplots", width = "100%", height = "600px"),      h3("Carriage diagram"),
+           img(src="train_floorplan.png",width="600", height="150",align="centre")
+           ), 
+
+    
     
     column(5,
-           plotOutput("trainemissions"),
-           img(src="train_floorplan.png",width="600", height="150",align="centre")
+           plotOutput("trainemissions", width = "60%"),
+           textOutput("emissionstext")
+           , align="center"
     )
 
     
