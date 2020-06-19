@@ -167,6 +167,7 @@ capacity <- function(width,length,radius) {
   }
   length(c(first_row,second_row,third_row))
 }
+<<<<<<< Updated upstream
 
 
 shield_locations_to_use <- function(shield_length,num_of_shields,shield_locations){
@@ -236,3 +237,5 @@ order_shields <- c(1,4,5,8,9,12,13,16,17,20,21,24,25,28,29,32,33,36)
 
 
 
+=======
+>>>>>>> Stashed changes
