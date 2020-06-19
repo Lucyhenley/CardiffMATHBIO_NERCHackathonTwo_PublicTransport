@@ -7,8 +7,6 @@ This repository is Cardiff University MATHBIO's entry to <a href="https://digita
 
 ## RESULT: The seating optimiser app is published <a href="https://lucyhenley.shinyapps.io/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/" target="_blank">**here**</a>.
 
-### Goal: Reduce public transport emissions per person by creating a tool that will present an optimal seating arrangement under social distancing.
-
 ---
 
 ## Table of Contents
@@ -77,34 +75,22 @@ Assuming there is demand for public transport, the greatest factor limiting its 
 
 ## Transport capacity
 
-One restriction on the number of people using public transport is the effect of social distancing. In the UK, social distancing requires that people remain 2 metres away from one another to minimise the risk of transmission of disease, which also applies to seating on public transport, resulting in many seats becoming unusable. A train or bus can quickly become 'full' with only a fraction of its total capacity on board, as all remaining empty seats are within 2 metres of another passenger.
+One restriction on the number of people using public transport is the effect of social distancing. In the UK, social distancing currently requires that people remain 2 metres away from one another to minimise the risk of transmission of disease, which also applies to seating on public transport, resulting in many seats becoming unusable. A train or bus can quickly become 'full' with only a fraction of its total capacity on board, as all remaining empty seats are within 2 metres of another passenger.
 
 In order to address this problem, we have designed an app which determines the actual maximum capacity of a train or bus, depending on the radius of social distancing. This app also demonstrates where these passengers should be sitting to achieve this capacity. This is achieved for the class 150 sprinter train as an example, but can be generalised for any particular model.
 
 ---
-## The GUI
-
-The app uses a Graphical User Interface (GUI) to allow easy manipulation of input variables. There are sliders for:
-
-* the number of social distancing shields used;
-
-* the length of the shields;
-
-* and the social distancing distance
-
-
-Given these input values, the app reports the optimal number of seats which can be used in the train, their locations within the train and the emissions per passenger.
-
-Graphics are included which demonstrate the emissions per person, dependent on the number of passengers who can fit safely into the carriage. We also plot the emissions per passenger of small and large cars, so that we can identify the exact number of passengers requires per carriage to make public transport a lower-emission method of travel.
-
-The GUI is published <a href="https://lucyhenley.shinyapps.io/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/" target="_blank">**here**</a>.
-
----
-
 ## Shielding
 Many industries have taken to the use of plastic barriers, or 'shields', which can ease the effect of social distancing by placing a physical barrier between people to prevent transmission of disease. Such shields can be applied to public transport, in order to maximise the capacity of public transport and ensure that passengers feel safe whilst travelling.
 
 We define some basic shielding patterns in the app and include the effect of shields 'blocking' transmission of disease to increase the number of people who can safely use public transport. A possible side effect is that we can demonstrate multiple shielding patterns which achieve the same capacity, but use different quantities of shielding material. As most shielding is made of plastic, reducing the volume of plastic required has additional benefits in reducing pollution. 
+
+The shielding patterns used are shown below. For both patterns, the shields are positioned between rows of seats such that they block transmission horizontally. The standard shielding pattern adds shields in consecutive rows from the front of the train to the back, eventuallly filling every available row. The zig zag shielding pattern adds shields in every other row on either side of the train, forming a zig zag pattern. 
+
+
+<p float="left">
+<img  src=https://github.com/Lucyhenley/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/blob/master/gif_images/Diagonal_seat.gif?raw=true alt="gif" class = "center" width="300" height = "300"/>
+<img  src=https://github.com/Lucyhenley/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/blob/master/gif_images/Standard_seat.gif?raw=true alt="gif" class = "center" width="300" height = "300"/>
 
 ---
 
@@ -131,6 +117,24 @@ As a worst case scenario, we assume that all passengers who cannot fit onto a tr
 - We assume that passengers must be seated on the bus or train, and so are restricted to being in the seat locations.
 
 ---
+## The GUI
+
+The app uses a Graphical User Interface (GUI) to allow easy manipulation of input variables. There are sliders for:
+
+* the number of social distancing shields used;
+
+* the length of the shields;
+
+* and the social distancing distance
+
+
+Given these input values, the app reports the optimal number of seats which can be used in the train, their locations within the train and the emissions per passenger.
+
+Graphics are included which demonstrate the emissions per person, dependent on the number of passengers who can fit safely into the carriage. We also plot the emissions per passenger of small and large cars, so that we can identify the exact number of passengers requires per carriage to make public transport a lower-emission method of travel.
+
+The GUI is published <a href="https://lucyhenley.shinyapps.io/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/" target="_blank">**here**</a>.
+
+
 
 ## Team
 
