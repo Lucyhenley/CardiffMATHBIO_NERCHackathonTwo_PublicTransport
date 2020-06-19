@@ -79,6 +79,7 @@ Placing shields allows for a greater capacity, as shown below.
 <p align="center">
 <img  src="https://github.com/Lucyhenley/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/blob/master/figs/one_two_shielding_plot.png?raw=true" alt="Train capacity" class = "center" width="400" height = 400/>
  </p>
+ 
 *The effect of social distancing measures on the passenger capacity*
 
 ---
@@ -95,6 +96,7 @@ As a worst case scenario, we assume that all passengers who cannot fit onto a tr
 <p align="center">
 <img src="https://github.com/Lucyhenley/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/blob/master/figs/train_emissions.png?raw=true" alt="Emissions per passenger" width="400" height = "400"/>
 </p>
+
 *The emissions per passenger of a variety of modes of transport*
 
 Train travel is always more efficient than using large cars, but you need a minimum capacity of 17 people per carriage on a train to make them produce less emissions per person than small cars, and 10 to produce less emissions than a large car.
@@ -118,6 +120,7 @@ The minimum capacity of a train carriage, with no shielding and a maximum social
 <p align="center">
 <img  src="https://github.com/Lucyhenley/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/blob/master/figs/screenshot.png?raw=true" alt="App Screenshot" class = "center" width="800" height = "400"/>
 </p>
+
 *A screenshot of the app*
 
 The app uses a Graphical User Interface (GUI) to allow easy manipulation of input variables. There are sliders for:
