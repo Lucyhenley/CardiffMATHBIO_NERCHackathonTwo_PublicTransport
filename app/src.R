@@ -93,6 +93,7 @@ heatmapper <- function(seat_locations,radius,domain_x,domain_y) {
 shielded_heatmapper <- function(seat_locations,shield,radius,domain_x,domain_y) {
   theta <- seq(0, 2*pi, length.out = 100)
   heatmaps <- array(numeric(),c(2,100*nrow(seat_locations)))
+ # print(seat_locations)
   for (j in 1:nrow(seat_locations)) {
     shield_interact <- c()
     x_circle <- radius*cos(theta) + seat_locations[j,"x"]
@@ -106,11 +107,25 @@ shielded_heatmapper <- function(seat_locations,shield,radius,domain_x,domain_y) 
       shield_x <- rep(shield[i,1],100)
       distance2 <- (shield_x-seat_locations[j,"x"])^2 + (shield_y-seat_locations[j,"y"])^2
       if (min(distance2) < radius^2) {
-        if (shield[i,1] < seat_locations[j,"x"]) {     
-          x_circle[x_circle<shield[i,1] & y_circle < max(shield_y) & y_circle>min(shield_y)] <- shield_x[x_circle < shield[i,1] & y_circle< max(shield_y) & y_circle> min(shield_y)]
+        if (shield[i,1] < seat_locations[j,"x"]) {  
+          shield_top <- max(shield[i,3], shield[i,4])
+          shield_bottom <- min(shield[i,3],shield[i,4])
+          vec1 <- c(shield[i,1]-seat_locations[j,"x"],shield_top -seat_locations[j,"y"])
+          vec2 <- c(shield[i,1]-seat_locations[j,"x"],shield_bottom -seat_locations[j,"y"]) 
+          Trapezium_1 <- seat_locations[j,] + 20*vec1
+          Trapezium_2 <- seat_locations[j,] + 20*vec2
+          condition_in<- inpolygon(x_circle,y_circle,c(shield[i,1],Trapezium_1$x,Trapezium_2$x,shield[i,1]),c(shield_top, Trapezium_1$y,Trapezium_2$y,shield_bottom))
+          x_circle[condition_in] <- shield[i,1]
         }
         else {
-          x_circle[x_circle>shield[i,1] & y_circle < max(shield_y) & y_circle>min(shield_y)] <- shield_x[x_circle > shield[i,1] & y_circle< max(shield_y) & y_circle> min(shield_y)]
+          shield_top <- max(shield[i,3], shield[i,4])
+          shield_bottom <- min(shield[i,3],shield[i,4])
+          vec1 <- c(shield[i,1]-seat_locations[j,"x"],shield_top -seat_locations[j,"y"])
+          vec2 <- c(shield[i,1]-seat_locations[j,"x"],shield_bottom -seat_locations[j,"y"]) 
+          Trapezium_1 <- seat_locations[j,] + 20*vec1
+          Trapezium_2 <- seat_locations[j,] + 20*vec2
+          condition_in<- inpolygon(x_circle,y_circle,c(shield[i,1],Trapezium_2$x,Trapezium_1$x,shield[i,1]),c(shield_bottom, Trapezium_2$y,Trapezium_1$y,shield_top))
+          x_circle[condition_in] <- shield[i,1]
         }
       }
     }
@@ -169,6 +184,7 @@ capacity <- function(width,length,radius) {
 }
 
 
+
 shield_locations_to_use <- function(shield_length,num_of_shields,shield_locations){
   for (i in 1:nrow(shield_locations)){
     if (i%%2 == 0){
@@ -197,7 +213,6 @@ use_zig_zag_shields <-function(shield_length,num_of_shields,shield_locations){
   
   shield_to_plot <- matrix(nrow=num_of_shields, ncol=4)
 
-  
   
 order_shields <- c(1,4,5,8,9,12,13,16,17,20,21,24,25,28,29,32,33,36)
 
@@ -234,6 +249,7 @@ order_shields <- c(1,4,5,8,9,12,13,16,17,20,21,24,25,28,29,32,33,36)
   shield_to_plot
 
 }
+
 
 
 
