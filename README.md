@@ -23,12 +23,12 @@ This repository is Cardiff University MATHBIO's entry to <a href="https://digita
 
 
 
-<p float="center">
-<img  src="https://github.com/Lucyhenley/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/blob/master/figs/screenshot.png?raw=true" alt="App Screenshot" class = "center" width="440" height = "400"/>
- <img  src="https://github.com/Lucyhenley/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/blob/master/figs/max_capacity.png?raw=true" alt="Train capacity" class = "center" width="440" height = 400/>
+<p align="center">
+<img  src="https://github.com/Lucyhenley/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/blob/master/figs/screenshot.png?raw=true" alt="App Screenshot" class = "center" width="800" height = "400"/>
 </p>
 <p align="center">
-<img src="https://github.com/Lucyhenley/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/blob/master/figs/train_emissions.png?raw=true" alt="Emissions per passenger" width="450" height = "400"/>
+<img  src="https://github.com/Lucyhenley/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/blob/master/figs/one_two_shielding_plot.png?raw=true" alt="Train capacity" class = "center" width="400" height = 400/>
+<img src="https://github.com/Lucyhenley/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/blob/master/figs/train_emissions.png?raw=true" alt="Emissions per passenger" width="400" height = "400"/>
 </p>
 
 
@@ -72,21 +72,23 @@ Assuming there is demand for public transport, the greatest factor limiting its 
 
 ## Transport capacity
 
-One restriction on the number of people using public transport is the effect of social distancing. In the UK, social distancing currently requires that people remain 2 metres away from one another to minimise the risk of transmission of disease, which also applies to seating on public transport, resulting in many seats becoming unusable. A train or bus can quickly become 'full' with only a fraction of its total capacity on board, as all remaining empty seats are within 2 metres of another passenger.
+One restriction on the number of people using public transport is the effect of social distancing. In the UK, social distancing currently requires that people remain 2 metres away from one another to minimise the risk of transmission of disease, which also applies to seating on public transport, resulting in many seats becoming unusable. A train can quickly become 'full' with only a fraction of its total capacity on board, as all remaining empty seats are within 2 metres of another passenger.
 
-In order to address this problem, we have designed an app which determines the actual maximum capacity of a train or bus, depending on the radius of social distancing. This app also demonstrates where these passengers should be sitting to achieve this capacity. This is achieved for the class 150 sprinter train as an example, but can be generalised for any particular model.
+In order to address this problem, we have designed an app which determines the actual maximum capacity of a train, depending on the radius of social distancing. This app also demonstrates where these passengers should be sitting to achieve this capacity. This is achieved for the class 150 sprinter train as an example, but can be generalised for any particular model.
 
 ---
 ## Shielding
 Many industries have taken to the use of plastic barriers, or 'shields', which can ease the effect of social distancing by placing a physical barrier between people to prevent transmission of disease. Such shields can be applied to public transport, in order to maximise the capacity of public transport and ensure that passengers feel safe whilst travelling.
 
-We define some basic shielding patterns in the app and include the effect of shields 'blocking' transmission of disease to increase the number of people who can safely use public transport. A possible side effect is that we can demonstrate multiple shielding patterns which achieve the same capacity, but use different quantities of shielding material. As most shielding is made of plastic, reducing the volume of plastic required has additional benefits in reducing pollution. 
+We define some basic shielding patterns in the app and include the effect of shields 'blocking' transmission of disease to increase the number of people who can safely use public transport. As most shielding is made of plastic, reducing the volume of plastic required has additional benefits in reducing pollution, so the ability to vary shielding length and placement lets rail services use the app to maximise train capacity whilst minimising the volume of plastic needed for shielding.
 
-The shielding patterns used are shown below. For both patterns, the shields are positioned between rows of seats such that they block transmission horizontally. The sequential shielding pattern adds shields in consecutive rows from the front of the train to the back, eventuallly filling every available row. The zig zag shielding pattern adds shields in every other row on either side of the train, forming a zig zag pattern. 
+The shielding patterns used are shown below. For both patterns, the shields are positioned between rows of seats such that they block transmission horizontally. The sequential shielding pattern adds shields in consecutive rows from the front of the train to the back, eventually filling every available row. The zig zag shielding pattern adds shields in every other row on either side of the train, forming a zig zag pattern.
 
 <p align="center">
-<img  src=https://github.com/Lucyhenley/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/blob/master/gif_images/shield.gif?raw=true alt="gif" class = "center" width="600" height = "500"/>
+<img  src=https://github.com/Lucyhenley/CardiffMATHBIO_NERCHackathonTwo_PublicTransport/blob/master/gif_images/shield.gif?raw=true alt="gif" class = "center" width="400" height = "500"/>
  </p>
+
+The app also allows for a manual selection of shield placements, so shields can be placed in any available location.
 
 ---
 
@@ -110,8 +112,9 @@ The minimum capacity of a train carriage, with no shielding and a maximum social
 
 - We assume that all people travelling are commuters, and if they cannot travel by train then they will travel by car instead of finding another alternative method of transport.
 - All commuters take separate cars to their destination, since, due to social distancing, they cannot share cars with other passengers.
-- We assume trains are running at full capacity and therefore any unfilled seats on a bus or train correspond to a commuter who must drive to work
-- We assume that passengers must be seated on the bus or train, and so are restricted to being in the seat locations.
+- We assume trains are running at full capacity and therefore any unfilled seats on train correspond to a commuter who must drive to work
+- We assume that passengers must be seated on the train, and so are restricted to being in the seat locations.
+- We assume that the train has an 'exit' and 'entrance', so flow in the train at stations is uni-directional. People must fill up the train from the back, and sit only in allocated 'safe' seats.
 
 ---
 ## The GUI
@@ -139,7 +142,7 @@ The team is comprised of PhD Students from the mathematics department of Cardiff
 
 | <a href="https://www.cardiff.ac.uk/people/research-students/view/1321735-henley-lucy" target="_blank">**Lucy Henley, Project Lead**</a> | <a href="https://www.cardiff.ac.uk/people/research-students/view/1710080-moore-joshua" target="_blank">**Joshua Moore**</a> | <a href="https://www.cardiff.ac.uk/people/research-students/view/1710088-ostler-timothy" target="_blank">**Timothy Ostler**</a> |
 | :---: |:---:| :---:|
-| [![Lucy Henley](https://avatars1.githubusercontent.com/Lucyhenley)](https://github.com/Lucyhenley)    | [![Joshua Moore](https://avatars1.githubusercontent.com/joshwillmoore1)](https://github.com/joshwillmoore1) | [![Timothy Ostler](https://avatars1.githubusercontent.com/OstlerT)](https://github.com/OstlerT)  |
+| [![Lucy Henley](https://avatars1.githubusercontent.com/Lucyhenley?s=200)](https://github.com/Lucyhenley)    | [![Joshua Moore](https://avatars1.githubusercontent.com/joshwillmoore1?s=200)](https://github.com/joshwillmoore1) | [![Timothy Ostler](https://avatars1.githubusercontent.com/OstlerT?s=200)](https://github.com/OstlerT)  |
 | <a href="https://github.com/Lucyhenley" target="_blank">`github.com/Lucyhenley`</a> | <a href="https://github.com/joshwillmoore1" target="_blank">`github.com/joshwillmoore1`</a> | <a href="https://github.com/OstlerT" target="_blank">`github.com/OstlerT`</a> |
 
 

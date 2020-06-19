@@ -208,7 +208,6 @@ server <- function(input, output, session) {
     
     
     if (shield_loc[4]==0){
-      print("it reaches here")
       heatmaps <- heatmapper(seat_locations,social_distancing,domain_x,domain_y)
       
     }else{
@@ -247,7 +246,7 @@ server <- function(input, output, session) {
     markertype <- c(19,19,19)
     text <- c("Unsafe seat","Available seat", "Safe radius","Shields")
     legend(x = "top",x.intersp = 0.05,inset = 0,  legend = text, lty = c(NA,NA,NA,1), pt.bg = plot_colours, pt.cex= c(2,2,4,NA),
-           col=c("red","black",rgb(0,0,1,0.2),"red"), lwd=c(NA,NA,NA,3), cex=2, pch = markertype, horiz = TRUE, text.width = 1.2)
+           col=c("red","black",rgb(0,0,1,0.2),"red"), lwd=c(NA,NA,NA,3), cex=2, pch = markertype, horiz = TRUE, text.width = 1.4)
 
   })
 
