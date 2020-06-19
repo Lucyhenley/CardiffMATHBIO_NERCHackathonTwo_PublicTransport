@@ -2,7 +2,8 @@
 
 ui <- fluidPage(
   
-  titlePanel(h1("BIG TITLE",align="centre")),
+  titlePanel(h1("Optimisation of carriage capacity",align="centre"),
+             h4("Explanation text here")),
   
   fluidRow(
     column(3,     radioButtons(
@@ -12,8 +13,8 @@ ui <- fluidPage(
         "Standard shield patterning" = 1,
         "Zig-Zag shield patterning" = 0
       ),
-      selected = 1))
-  ),
+      selected = 1)),
+  
     
     conditionalPanel(condition = "input.inputSelect == 1",
                      column(3,      sliderInput("NumberofShields", h4("Number of shields", align = "center"),
@@ -40,30 +41,33 @@ ui <- fluidPage(
   ),
 
   
-  fluidRow(
-    column(12, textOutput("capacity"))
-  ),
+ # fluidRow(
+#    column(12, textOutput("capacity"))
+#  ),  
   
   fluidRow(
+    column(7,
+           headerPanel(""),
+           headerPanel(""),
+           plotOutput("subplots"))
+#           textOutput("capacity"))
+    ,
     
-    column(6, h3("Usable train seats", align = "center", width = '100%'),
-           plotOutput("social_distanced_capacity")),
-    
-    column(6, h3("Usable train seats with shielding", align = "center", width = '100%'),
-           plotOutput("shielded_capacity"))
+    column(5,
+           plotOutput("trainemissions")
+          )
+           
   ),
+  
+#  fluidRow(
+#    column(8, h1("ediuhe")),
+#    column(4,textOutput("emissionstext")       )
+#  ),
   
   fluidRow(
     column(4),
-    column(4, h3("Emissions per passenger", align = "center", width='50%'),
-           plotOutput("trainemissions"))
-    
-  ),
-  
-  
-  fluidRow(
-    column(12,      h1("Train plan", align = "center"),
-           img(src="train_floorplan.png",width="750", height="190")
+    column(4,      h1("Train plan", align = "center"),
+           img(src="train_floorplan.png",width="600", height="150")
     )
   )
     
