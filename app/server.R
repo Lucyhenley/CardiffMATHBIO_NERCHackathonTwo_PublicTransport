@@ -115,12 +115,12 @@ server <- function(input, output, session) {
        xlab="", ylab="")
   mtext(side=3, line=3, at=-0.07, adj=0, cex=1.2,font=2,  mytitle)
   mtext(side=3, line=1.6, at=-0.07, adj=0, cex=1, font=2, captext)
-  points(seat_locations$x,seat_locations$y,pch=19,col=rgb(1, 0, 0,1))
+  points(seat_locations$x,seat_locations$y,pch=4,col=rgb(1, 0, 0,1))
     for (j in 1:nrow(seat_sd)) {
       idx1 <- 1+100*(j-1)
       idx2 <- 100*(j-1) + 100
       polygon(x=heatmaps[1,idx1:idx2],y=heatmaps[2,idx1:idx2],col=rgb(0, 0, 1,0.2))
-      points(seat_sd[j,"x"],seat_sd[j,"y"],pch=19)
+      points(seat_sd[j,"x"],seat_sd[j,"y"],cex=2,pch=19)
     }
   
     lines(x_box,y_box)
@@ -134,12 +134,12 @@ server <- function(input, output, session) {
     mytitle <- "Available seats with social distancing measures and shielding"
     mtext(side=3, line=3, at=-0.07, adj=0, cex=1.2, font=2, mytitle)
     mtext(side=3, line=1.6, at=-0.07, adj=0, cex=1, font=2, captext)
-    points(seat_locations$x,seat_locations$y,pch=19,col=rgb(1, 0, 0,1))
+    points(seat_locations$x,seat_locations$y,pch=4,col=rgb(1, 0, 0,1))
     for (j in seats$n) {
       idx1 <- 1+100*(j-1)
       idx2 <- 100*(j-1) + 100
       polygon(x=heatmaps[1,idx1:idx2],y=heatmaps[2,idx1:idx2],col=rgb(0, 0, 1,0.2))
-      points(seats$x[seats$n==j],seats$y[seats$n==j],pch=19)
+      points(seats$x[seats$n==j],seats$y[seats$n==j],pch=19,cex=2)
     }
     lines(x_box,y_box)
     par(mar=c(0,0,0,0))
