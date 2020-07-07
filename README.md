@@ -102,9 +102,7 @@ As a worst case scenario, we assume that all passengers who cannot fit onto a tr
 
 *The emissions per passenger of a variety of modes of transport*
 
-Train travel is always more efficient than using large cars, but you need a minimum capacity of 17 people per carriage on a train to make them produce less emissions per person than small cars, and 10 to produce less emissions than a large car.
-
-The minimum capacity of a train carriage, with no shielding and a maximum social distancing radius of 2 meters, is 16 passengers, so train travel is always more efficient than the use of large cars, but shielding or a reduction in social distancing radius is needed to make train travel more efficient than the use of small cars.
+A minimum capacity of 17 people per carriage on a train is needed to make them produce less emissions per person than small cars, and 10 to produce less emissions than a large car. The minimum capacity of a train carriage, with no shielding and a maximum social distancing radius of 2 meters, is 16 passengers, so at full capacity train travel is always more efficient than the use of large cars, but shielding or a reduction in social distancing radius is needed to make train travel more efficient than the use of small cars.
 
 
 
